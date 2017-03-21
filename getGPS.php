@@ -32,7 +32,7 @@
     }
     $conn->close();
 
-//  == function definitions ==================
+    //function definitions =====
     function writeKML($rows){
         $coordinates = '';
         foreach($rows as $row){
@@ -48,16 +48,7 @@
         $kml_folder = $kml_Document->addChild('Folder');
         $kml_folder->addChild('name','Vehicle #01');
         
-         //add path====
-        $kml_placemark = $kml_folder->addChild('Placemark');
-        $kml_placemark->addChild('name','Path');
-        $kml_placemark->addChild('description','Description for Vehicle #01 path');
-        $kml_placemark->addChild('styleUrl','#linestyle');
-        $kml_linestring = $kml_placemark->addChild('LineString');
-        $kml_linestring->addChild('extrude', '1');
-        $kml_linestring->addChild('tessellate', '1');
-        $kml_coordinates = $kml_linestring->addChild('coordinates', $coordinates);
-
+        //add style====
         $kml_style = $kml_folder->addChild('Style');
         $kml_style->addAttribute('id','linestyle');
         $kml_linestyle = $kml_style->addChild('LineStyle');
@@ -72,9 +63,18 @@
         $kml_icon = $kml_iconstyle->addChild('Icon');
         $kml_icon->addChild('href','ambulance2.png');
 
+         //add path====
+        $kml_placemark = $kml_folder->addChild('Placemark');
+        $kml_placemark->addChild('name','Path');
+        $kml_placemark->addChild('description','Description for Vehicle #01 path');
+        $kml_placemark->addChild('styleUrl','#linestyle');
+        $kml_linestring = $kml_placemark->addChild('LineString');
+        $kml_linestring->addChild('extrude', '1');
+        $kml_linestring->addChild('tessellate', '1');
+        $kml_coordinates = $kml_linestring->addChild('coordinates', $coordinates);
+
         //add point====
         $kml_placemark2 = $kml_folder->addChild('Placemark');
-
         $kml_placemark2->addChild('name','Location');
         $kml_placemark2->addChild('description','Description for Vehicle #01 location');
         $kml_placemark2->addChild('styleUrl','#pointstyle');

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>GPS Test</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("button").click(function () {
+                    $.ajax({
+                        url: "getGPS.php",
+                        dataType: "JSON",
+                        timeout: 500,
+                        //data: { "query": "SELECT * FROM points ORDER BY timestamp DESC LIMIT 3"},
+                        data: {"format": "JSON", "limit": "4"},
+                        success: function (data) {
+                            var str = JSON.stringify(data, null, 2);
+                            $("#result").html(str);
+                        },
+                        error: function (jqXHR, textStatus) {
+                            console.info(textStatus);
+                        }
+                    })
+                })
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="div1">
+            <h2>Get latest 3 points with jQuery AJAX</h2>
+        </div>
+        <button>Get External Content</button>
+        <pre id="result"></pre>
+    </body>
+</html>
